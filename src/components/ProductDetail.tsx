@@ -1,11 +1,22 @@
-import React, { Attributes } from "react";
+import React, { Attributes, useContext } from "react";
 import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Button } from "./ui/button";
 import { Product } from "@/lib/productdata";
+import Cart from "./Cart";
+import { useState } from "react";
+import { CartContext } from "@/context/CartContext";
 
 const ProductDetail = (props: Product) => {
+  const { handleSheetTrigger } = useContext(CartContext);
+
+  const { cart, addToCart } = useContext(CartContext);
+  function handleClick(id: number) {
+    addToCart(id);
+    handleSheetTrigger(id);
+  }
+
   return (
     <>
       <div>
@@ -85,14 +96,16 @@ const ProductDetail = (props: Product) => {
           </Select>
         </div>
       </div>
-      <Button size="lg">Add to cart</Button>
+      <Button onClick={() => handleClick(props.id)} size="lg" className="bg-primary">
+        Add to cart
+      </Button>
     </>
   );
 };
 
 export default ProductDetail;
 
-function StarIcon(props: Attributes) {
+function StarIcon(props) {
   return (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />

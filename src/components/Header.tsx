@@ -1,11 +1,20 @@
+"use client";
+
 import Image from "next/image";
 import { Input } from "./ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import Link from "next/link";
+import Cart from "./Cart";
+import { useContext, useState } from "react";
+import { Button } from "./ui/button";
+import { CartContext } from "@/context/CartContext";
 
 const Header = () => {
+  const { handleSheetTrigger } = useContext(CartContext);
+  const { SheetTrigger, setSheetTrigger } = useContext(CartContext);
+
   return (
-    <header className="container-fluid py-3 px-6 flex justify-between items-center">
+    <header className="container-fluid py-4 px-6 flex justify-between items-center">
       <Link href="/">
         <Image src="/Logo.svg" alt={"Logo"} width={100} height={100} />
       </Link>
@@ -17,7 +26,9 @@ const Header = () => {
         <div className="icons flex justify-between items-center gap-3">
           <Image className="hover:cursor-pointer" src="/message.svg" alt={"Logo"} width={25} height={100} />
           <Image className="hover:cursor-pointer" src="/heart.svg" alt={"Logo"} width={25} height={100} />
-          <Image className="hover:cursor-pointer" src="/shopping-cart.svg" alt={"Logo"} width={25} height={100} />
+          <a href="#" onClick={handleSheetTrigger}>
+            <Image className="hover:cursor-pointer" src="/shopping-cart.svg" alt={"Logo"} width={25} height={100} />
+          </a>
         </div>
 
         <div className="profile">
@@ -36,6 +47,7 @@ const Header = () => {
           </DropdownMenu>
         </div>
       </div>
+      <Cart SheetTrigger={SheetTrigger} setSheetTrigger={setSheetTrigger} />
     </header>
   );
 };
