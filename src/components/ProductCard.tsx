@@ -1,13 +1,16 @@
 import Image from "next/image";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Product } from "@/lib/productdata";
+import Link from "next/link";
 
 const ProductCard = ({ id, title, description, rating, price, imageUrl }: Product) => {
   return (
     <>
       <Card className=" w-[300px] border-none shadow-none">
         <CardHeader className="mb-0 p-2">
-          <Image className="rounded mb-4" src={imageUrl} alt="Girl in Red Dress" width={"400"} height={100} />
+          <Link href={`/products/${id}`}>
+            <Image className="rounded mb-4" src={imageUrl} alt="Girl in Red Dress" width={"400"} height={100} />
+          </Link>
           <CardTitle className="text-lg">{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>

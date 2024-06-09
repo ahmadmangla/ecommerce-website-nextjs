@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -12,7 +13,9 @@ const Banner = () => {
 
       <p className="price font-bold text-white text-3xl mb-4">£82,61</p>
 
-      <Button className="p-6 bg-primary">View More</Button>
+      <Link href="/products">
+        <Button className="p-6 bg-primary">View More</Button>
+      </Link>
     </section>
   );
 };

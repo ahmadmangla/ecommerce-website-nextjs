@@ -8,7 +8,7 @@ import Header from "@/components/Header";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-  display: "swap",
+  display: "block",
 });
 
 // either Static metadata
