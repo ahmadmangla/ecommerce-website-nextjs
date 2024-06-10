@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useReducer, useState } from "react";
+import { Dispatch, SetStateAction, createContext, useReducer, useState } from "react";
 import { data } from "@/lib/productdata";
 import { Product } from "@/lib/productdata";
 
@@ -9,8 +9,8 @@ interface Cart {
   addToCart: Function;
   removeFromCart: Function;
   SheetTrigger: boolean;
-  setSheetTrigger: Function;
-  handleSheetTrigger: Function;
+  setSheetTrigger: Dispatch<SetStateAction<boolean>>;
+  handleSheetTrigger: React.MouseEventHandler;
 }
 
 const InitialValue = {
@@ -29,7 +29,7 @@ export default function CartContextProvider({ children }: { children: React.Reac
 
   const [SheetTrigger, setSheetTrigger] = useState(false);
 
-  function handleSheetTrigger(id?: number) {
+  function handleSheetTrigger() {
     setSheetTrigger(!SheetTrigger);
   }
 

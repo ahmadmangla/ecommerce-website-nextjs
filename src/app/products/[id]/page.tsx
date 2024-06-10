@@ -2,7 +2,6 @@
 
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
 import { data } from "@/lib/productdata";
 import { useParams } from "next/navigation";
 import Image from "next/image";
@@ -38,9 +37,7 @@ export default function Page() {
             </CarouselNext>
           </Carousel>
         </div>
-        <div className="grid gap-2">
-          <ProductDetail {...product} />
-        </div>
+        <div className="grid gap-2">{product && <ProductDetail {...product} />}</div>
       </div>
 
       <div className="col-span-2">
@@ -55,7 +52,7 @@ export default function Page() {
   );
 }
 
-function ChevronLeftIcon(props) {
+function ChevronLeftIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="m15 18-6-6 6-6" />
@@ -63,7 +60,7 @@ function ChevronLeftIcon(props) {
   );
 }
 
-function ChevronRightIcon(props) {
+function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="m9 18 6-6-6-6" />
@@ -71,7 +68,7 @@ function ChevronRightIcon(props) {
   );
 }
 
-function StarIcon(props) {
+function StarIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />

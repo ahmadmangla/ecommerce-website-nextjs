@@ -8,10 +8,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { CartContext } from "@/context/CartContext";
 import Image from "next/image";
-import { Product } from "@/lib/productdata";
+import { Product } from "@/types/ProductTypes";
 
 export default function Checkout() {
-  const { cart } = useContext(CartContext);
+  const { cart, removeFromCart } = useContext(CartContext);
   const [shippingInfo, setShippingInfo] = useState({
     name: "",
     address: "",
@@ -29,11 +29,8 @@ export default function Checkout() {
     phone: "",
   });
   const [sameAsShipping, setSameAsShipping] = useState(false);
-  const removeFromCart = (id) => {
-    setCart(cart.filter((item) => item.id !== id));
-  };
-  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const handleShippingChange = (e) => {
+  const total = cart?.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const handleShippingChange: React.FocusEventHandler<HTMLInputElement> = (e) => {
     setShippingInfo({
       ...shippingInfo,
       [e.target.name]: e.target.value,
@@ -45,7 +42,7 @@ export default function Checkout() {
       });
     }
   };
-  const handleBillingChange = (e) => {
+  const handleBillingChange: React.FocusEventHandler<HTMLInputElement> = (e) => {
     setBillingInfo({
       ...billingInfo,
       [e.target.name]: e.target.value,
@@ -156,22 +153,23 @@ export default function Checkout() {
             <h2 className="text-2xl font-bold mb-4">Order Summary</h2>
             <div className="space-y-4">
               <div className="space-y-2">
-                {cart?.map((item: Product) => (
-                  <div key={item.id} className="grid grid-cols-[80px_1fr_40px] items-center gap-4">
-                    <Image src={item.imageUrl} alt={item.title} width={80} height={80} className="rounded-md object-cover" />
-                    <div className="grid gap-1">
-                      <h4 className="font-medium">{item.title}</h4>
-                      <div className="flex items-center gap-2">
-                        <span className="text-gray-500 dark:text-gray-400">Qty: {item.quantity}</span>
-                        <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
+                {cart &&
+                  cart?.map((item: Product) => (
+                    <div key={item.id} className="grid grid-cols-[80px_1fr_40px] items-center gap-4">
+                      <Image src={item.imageUrl} alt={item.title} width={80} height={80} className="rounded-md object-cover" />
+                      <div className="grid gap-1">
+                        <h4 className="font-medium">{item.title}</h4>
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-500 dark:text-gray-400">Qty: {item.quantity}</span>
+                          <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
+                        </div>
                       </div>
+                      <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
+                        <Trash2Icon className="h-4 w-4" />
+                        <span className="sr-only">Remove {item.title} from cart</span>
+                      </Button>
                     </div>
-                    <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
-                      <Trash2Icon className="h-4 w-4" />
-                      <span className="sr-only">Remove {item.title} from cart</span>
-                    </Button>
-                  </div>
-                ))}
+                  ))}
               </div>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">

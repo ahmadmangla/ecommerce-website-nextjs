@@ -1,12 +1,11 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { CartContext } from "@/context/CartContext";
 import Image from "next/image";
-import { Product } from "@/lib/productdata";
-import Link from "next/link";
+import { Product } from "@/types/ProductTypes";
 import { useRouter } from "next/navigation";
 
 export default function Cart(props) {
@@ -16,12 +15,6 @@ export default function Cart(props) {
   const total = cart?.reduce((acc, item) => acc + item.price * item.quantity, 0);
   return (
     <Sheet onOpenChange={props.setSheetTrigger} open={props.SheetTrigger}>
-      <SheetTrigger>
-        {/* <Button variant="outline" className="fixed bottom-4 right-4 z-50 shadow-lg">
-          <ShoppingCartIcon className="h-5 w-5 mr-2" />
-          View Cart ({cart?.length})
-        </Button> */}
-      </SheetTrigger>
       <SheetContent className="w-full max-w-md">
         <SheetHeader>
           <SheetTitle>Your Cart</SheetTitle>
