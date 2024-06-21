@@ -1,6 +1,9 @@
+"use client";
+
 import Banner from "@/components/Banner";
 import ProductList from "@/components/ProductList";
-import React from "react";
+import Filters from "@/components/Filters";
+import ProductSorting from "@/components/ProductSorting";
 
 const page = () => {
   return (
@@ -13,8 +16,15 @@ const page = () => {
           </div>
         </div>
       </div>
-      <section>
-        <ProductList />
+      <section className="flex mx-auto my-auto container gap-5">
+        <div className="filters w-full max-w-56 px-4">
+          <h2 className="font-bold py-3 text-xl">Filters</h2>
+          <Filters />
+        </div>
+        <div className="container">
+          <ProductSorting />
+          <ProductList />
+        </div>
       </section>
       );
     </>
@@ -22,3 +32,71 @@ const page = () => {
 };
 
 export default page;
+
+// export default function Component() {
+//   return (
+//     <div className="container mx-auto py-8">
+//       <h1 className="text-3xl font-bold mb-6">Product Catalog</h1>
+//       <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
+//         <div className="bg-background rounded-lg shadow-md p-6">
+//           <h2 className="text-lg font-bold mb-4">Filters</h2>
+//         </div>
+//         <div>
+//
+//           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+//             {filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((product) => (
+//               <div key={product.id} className="bg-background rounded-lg shadow-md overflow-hidden">
+//                 <img src="/placeholder.svg" alt={product.title} width={300} height={300} className="w-full h-48 object-cover" />
+//                 <div className="p-4">
+//                   <h3 className="text-lg font-bold mb-2">{product.title}</h3>
+//                   <div className="flex items-center mb-2">
+//                     <div className="flex items-center gap-1 text-yellow-500">
+//                       {[...Array(Math.floor(product.rating))].map((_, i) => (
+//                         <StarIcon key={i} className="w-4 h-4" />
+//                       ))}
+//                       {product.rating % 1 !== 0 && <StarHalfIcon className="w-4 h-4 text-yellow-500" />}
+//                     </div>
+//                     <span className="ml-2 text-sm text-muted-foreground">({product.rating.toFixed(1)})</span>
+//                   </div>
+//                   <div className="text-lg font-bold">${product.price.toFixed(2)}</div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//           <div className="flex justify-center mt-8">
+//             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+function ListOrderedIcon(props) {
+  return (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="10" x2="21" y1="6" y2="6" />
+      <line x1="10" x2="21" y1="12" y2="12" />
+      <line x1="10" x2="21" y1="18" y2="18" />
+      <path d="M4 6h1v4" />
+      <path d="M4 10h2" />
+      <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1" />
+    </svg>
+  );
+}
+
+function StarHalfIcon(props) {
+  return (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 17.8 5.8 21 7 14.1 2 9.3l7-1L12 2" />
+    </svg>
+  );
+}
+
+function StarIcon(props) {
+  return (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}

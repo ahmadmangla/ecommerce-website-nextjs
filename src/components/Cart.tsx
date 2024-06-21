@@ -8,13 +8,18 @@ import Image from "next/image";
 import { Product } from "@/types/ProductTypes";
 import { useRouter } from "next/navigation";
 
-export default function Cart(props) {
+export default function Cart() {
   const router = useRouter();
-  const { cart, removeFromCart } = useContext(CartContext);
+  const { cart, removeFromCart, setSheetTrigger, SheetTrigger, handleSheetTrigger } = useContext(CartContext);
+
+  function handleClick() {
+    router.push("/checkout");
+    handleSheetTrigger();
+  }
 
   const total = cart?.reduce((acc, item) => acc + item.price * item.quantity, 0);
   return (
-    <Sheet onOpenChange={props.setSheetTrigger} open={props.SheetTrigger}>
+    <Sheet onOpenChange={setSheetTrigger} open={SheetTrigger}>
       <SheetContent className="w-full max-w-md">
         <SheetHeader>
           <SheetTitle>Your Cart</SheetTitle>
@@ -47,7 +52,7 @@ export default function Cart(props) {
             <span className="font-medium">${total?.toFixed(2)}</span>
           </div>
           <div className="flex gap-2 ml-0">
-            <Button className="ml-0" onClick={() => router.push("/checkout")} size="lg">
+            <Button className="ml-0" onClick={handleClick} size="lg">
               Checkout
             </Button>
 
@@ -61,17 +66,7 @@ export default function Cart(props) {
   );
 }
 
-function ShoppingCartIcon(props) {
-  return (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="8" cy="21" r="1" />
-      <circle cx="19" cy="21" r="1" />
-      <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-    </svg>
-  );
-}
-
-function Trash2Icon(props) {
+function Trash2Icon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 6h18" />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -198,7 +198,7 @@ export default function Checkout() {
   );
 }
 
-function Trash2Icon(props) {
+function Trash2Icon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 6h18" />

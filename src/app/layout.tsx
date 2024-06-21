@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import CartContextProvider, { CartContext } from "@/context/CartContext";
 import Cart from "@/components/Cart";
 import { useContext } from "react";
+import ProductContextProvider from "@/context/ProductContext";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -21,14 +22,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: any) {
   return (
-    <CartContextProvider>
-      <html lang="en">
-        <head />
-        <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
-          <Header />
-          {children}
-        </body>
-      </html>
-    </CartContextProvider>
+    <ProductContextProvider>
+      <CartContextProvider>
+        <html lang="en">
+          <head />
+          <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
+            <Header />
+            {children}
+          </body>
+        </html>
+      </CartContextProvider>
+    </ProductContextProvider>
   );
 }

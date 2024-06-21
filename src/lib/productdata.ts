@@ -8,7 +8,8 @@ export const data: Product[] = [
         description: "From United States",
         imageUrl: "/product-images/image-1380.png",
         rating: 5,
-        price: 48.25
+        price: 14.2,
+        category: "clothing"
     },
     {
         id: 2,
@@ -16,7 +17,8 @@ export const data: Product[] = [
         description: "From Indonesia",
         imageUrl: "/product-images/image-1386.png",
         rating: 4,
-        price: 32.99
+        price: 36.9,
+        category: "clothing"
     },
     {
         id: 3,
@@ -24,7 +26,8 @@ export const data: Product[] = [
         description: "From Indonesia",
         imageUrl: "/product-images/image-1382.png",
         rating: 4,
-        price: 29.82
+        price: 288.8,
+        category: "clothing"
     },
     {
         id: 4,
@@ -32,7 +35,8 @@ export const data: Product[] = [
         description: "From Indonesia",
         imageUrl: "/product-images/image-1384.png",
         rating: 5,
-        price: 29.82
+        price: 299.8,
+        category: "clothing"
     },
     {
         id: 5,
@@ -40,7 +44,8 @@ export const data: Product[] = [
         description: "From United States",
         imageUrl: "/product-images/image-1385.png",
         rating: 5,
-        price: 1750.25
+        price: 150.2,
+        category: "electronics"
     },
     {
         id: 6,
@@ -48,7 +53,9 @@ export const data: Product[] = [
         description: "From United States",
         imageUrl: "/product-images/image-1387.png",
         rating: 5,
-        price: 432.15
+        price: 42.1,
+        category: "shoes"
+        
     },
     {
         id: 7,
@@ -56,7 +63,8 @@ export const data: Product[] = [
         description: "From United States",
         imageUrl: "/product-images/image-1389.png",
         rating: 5,
-        price: 124.99   
+        price: 14.99,
+        category: "electronics"
     },
     {
         id: 8,
@@ -64,6 +72,7 @@ export const data: Product[] = [
         description: "From Indonesia",
         imageUrl: "/product-images/image-1390.png",
         rating: 5,
-        price: 128.99   
+        price: 18.99,
+        category: "shoes"
     }
 ]

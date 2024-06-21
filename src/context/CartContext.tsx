@@ -1,16 +1,16 @@
 "use client";
 
-import { Dispatch, SetStateAction, createContext, useReducer, useState } from "react";
+import { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
 import { data } from "@/lib/productdata";
-import { Product } from "@/lib/productdata";
+import { Product } from "@/types/ProductTypes";
 
 interface Cart {
-  cart: Product[] | null;
-  addToCart: Function;
-  removeFromCart: Function;
+  cart: Product[];
+  addToCart: (productId: number) => void;
+  removeFromCart: (id: number) => void;
   SheetTrigger: boolean;
   setSheetTrigger: Dispatch<SetStateAction<boolean>>;
-  handleSheetTrigger: React.MouseEventHandler;
+  handleSheetTrigger: () => void;
 }
 
 const InitialValue = {
@@ -26,31 +26,54 @@ export const CartContext = createContext<Cart>(InitialValue);
 
 export default function CartContextProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<Product[]>([]);
-
   const [SheetTrigger, setSheetTrigger] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("cart")) {
+      setCart(JSON.parse(localStorage.getItem("cart")));
+    } else {
+      localStorage.setItem("cart", JSON.stringify([]));
+    }
+  }, []);
 
   function handleSheetTrigger() {
     setSheetTrigger(!SheetTrigger);
   }
 
   function addToCart(productId: number) {
-    const alreadyExist = cart.find((id) => id.id === productId);
-
-    if (alreadyExist) {
-      alreadyExist.quantity++;
-      return;
-    }
-
-    const addedProduct = data.find((id) => id.id === productId);
-    if (addedProduct) {
-      addedProduct.quantity = 1;
-      setCart([...cart, addedProduct]);
+    const existingProduct = cart.find((product) => product.id === productId);
+    if (existingProduct) {
+      existingProduct.quantity++;
+      setCart([...cart]);
+      localStorage.setItem("cart", JSON.stringify([...cart]));
+    } else {
+      const newProduct = data.find((product) => product.id === productId);
+      if (newProduct) {
+        newProduct.quantity = 1;
+        setCart([...cart, newProduct]);
+        localStorage.setItem("cart", JSON.stringify([...cart, newProduct]));
+      }
     }
   }
 
-  const removeFromCart = (id: number) => {
-    setCart(cart.filter((item) => item.id !== id));
-  };
+  function removeFromCart(id: number) {
+    const updatedCart = cart.filter((item) => item.id !== id);
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  }
 
-  return <CartContext.Provider value={{ cart, addToCart, removeFromCart, handleSheetTrigger, SheetTrigger, setSheetTrigger }}>{children}</CartContext.Provider>;
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        handleSheetTrigger,
+        SheetTrigger,
+        setSheetTrigger,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 }

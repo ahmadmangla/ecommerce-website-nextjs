@@ -6,7 +6,7 @@ import Link from "next/link";
 const ProductCard = ({ id, title, description, rating, price, imageUrl }: Product) => {
   return (
     <>
-      <Card className=" w-[300px] border-none shadow-none">
+      <Card className=" md:w-[250px] border-none shadow-none">
         <CardHeader className="mb-0 p-2">
           <Link href={`/products/${id}`}>
             <Image className="rounded mb-4" src={imageUrl} alt="Girl in Red Dress" width={"400"} height={100} />
