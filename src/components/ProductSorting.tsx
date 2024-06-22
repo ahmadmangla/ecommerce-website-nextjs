@@ -7,7 +7,12 @@ import { ListOrderedIcon } from "lucide-react";
 import { ProductContext } from "@/context/ProductContext";
 
 const ProductSorting = () => {
-  const { sortBy, setSortBy } = useContext(ProductContext);
+  const context = useContext(ProductContext);
+
+  if (!context) {
+    throw new Error("Filters must be used within a ProductProvider");
+  }
+  const { sortBy, setSortBy } = context;
   return (
     <div className="flex items-center justify-between mb-4">
       <div>

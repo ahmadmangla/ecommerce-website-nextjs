@@ -4,13 +4,14 @@ import Banner from "@/components/Banner";
 import ProductList from "@/components/ProductList";
 import Filters from "@/components/Filters";
 import ProductSorting from "@/components/ProductSorting";
+import Image from "next/image";
 
 const page = () => {
   return (
     <>
       <div className="container py-12">
         <div className="relative mb-8 h-32 overflow-hidden rounded-lg">
-          <img src="/hero.png" alt="Checkout" width={1200} height={300} className="h-full w-full object-cover " />
+          <Image src="/hero.png" alt="Checkout" width={1200} height={300} className="h-full w-full object-cover " />
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900/50 to-gray-900/50 flex items-center justify-center">
             <h1 className="text-3xl font-bold text-white">Browser Our Products</h1>
           </div>
@@ -71,32 +72,3 @@ export default page;
 //     </div>
 //   );
 // }
-
-function ListOrderedIcon(props) {
-  return (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="10" x2="21" y1="6" y2="6" />
-      <line x1="10" x2="21" y1="12" y2="12" />
-      <line x1="10" x2="21" y1="18" y2="18" />
-      <path d="M4 6h1v4" />
-      <path d="M4 10h2" />
-      <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1" />
-    </svg>
-  );
-}
-
-function StarHalfIcon(props) {
-  return (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 17.8 5.8 21 7 14.1 2 9.3l7-1L12 2" />
-    </svg>
-  );
-}
-
-function StarIcon(props) {
-  return (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
-  );
-}

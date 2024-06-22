@@ -4,7 +4,13 @@ import { Checkbox } from "./ui/checkbox";
 import { ProductContext } from "@/context/ProductContext";
 
 const Filters = () => {
-  const { selectedFilters, setSelectedFilters } = useContext(ProductContext);
+  const context = useContext(ProductContext);
+
+  if (!context) {
+    throw new Error("Filters must be used within a ProductProvider");
+  }
+
+  const { selectedFilters, setSelectedFilters } = context;
 
   return (
     <div className="grid gap-4">

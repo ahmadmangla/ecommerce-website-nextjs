@@ -3,7 +3,7 @@ export interface Product {
     title: string,
     imageUrl: string,
     description: string,
-    quantity?: number,
+    quantity: 1,
     rating: number,
     price: number
     category: string,

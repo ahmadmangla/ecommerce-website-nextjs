@@ -68,7 +68,7 @@ export default function Checkout() {
   return (
     <div className="container mx-auto py-12 px-4 md:px-6">
       <div className="relative mb-8 h-32 overflow-hidden rounded-lg">
-        <img src="/hero.png" alt="Checkout" width={1200} height={300} className="h-full w-full object-cover" />
+        <Image src="/hero.png" alt="Checkout" width={1200} height={300} className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/50 to-gray-900/50 flex items-center justify-center">
           <h1 className="text-3xl font-bold text-white">Checkout</h1>
         </div>
@@ -174,7 +174,7 @@ export default function Checkout() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-gray-500 dark:text-gray-400">Subtotal</span>
-                  <span className="font-medium">${total.toFixed(2)}</span>
+                  <span className="font-medium">${total?.toFixed(2)}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-gray-500 dark:text-gray-400">Shipping</span>
@@ -187,7 +187,7 @@ export default function Checkout() {
                 <Separator />
                 <div className="flex items-center justify-between">
                   <span className="text-gray-500 dark:text-gray-400">Total</span>
-                  <span className="font-bold">${total.toFixed(2)}</span>
+                  <span className="font-bold">${total?.toFixed(2)}</span>
                 </div>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import Image from "next/image";
 
 const ProductReviews = () => {
   return (
@@ -8,7 +9,7 @@ const ProductReviews = () => {
       <div className="grid gap-6">
         <div className="flex gap-4">
           <Avatar className="w-10 h-10 border">
-            <img src="/Profile.png" alt="@shadcn" />
+            <Image src="/Profile.png" alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div className="grid gap-4">
@@ -27,15 +28,15 @@ const ProductReviews = () => {
             </div>
             <div className="text-sm leading-loose text-gray-500 dark:text-gray-400">
               <p>
-                I've been experimenting with my Acme Prism T-Shirt for a few weeks now, and it's been a versatile addition to my wardrobe. The fabric is soft and breathable, and the prism-inspired
-                design adds a unique touch to my outfits.
+                I&apos;ve been experimenting with my Acme Prism T-Shirt for a few weeks now, and it&apos;s been a versatile addition to my wardrobe. The fabric is soft and breathable, and the
+                prism-inspired design adds a unique touch to my outfits.
               </p>
             </div>
           </div>
         </div>
         <div className="flex gap-4">
           <Avatar className="w-10 h-10 border">
-            <img src="/Profile.png" alt="@shadcn" />
+            <Image src="/Profile.png" alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div className="grid gap-4">
@@ -54,8 +55,8 @@ const ProductReviews = () => {
             </div>
             <div className="text-sm leading-loose text-gray-500 dark:text-gray-400">
               <p>
-                The Acme Prism T-Shirt is a great addition to my wardrobe. The fabric is high-quality and the design is unique and eye-catching. I've received a lot of compliments on it. Overall, I'm
-                very satisfied with my purchase.
+                The Acme Prism T-Shirt is a great addition to my wardrobe. The fabric is high-quality and the design is unique and eye-catching. I&apos;ve received a lot of compliments on it. Overall,
+                I&apos;m very satisfied with my purchase.
               </p>
             </div>
           </div>

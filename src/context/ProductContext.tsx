@@ -4,6 +4,12 @@ import { createContext, useContext, useEffect, useMemo, useState, ReactNode, Set
 import { data } from "@/lib/productdata";
 import { Product } from "@/types/ProductTypes";
 
+interface SelectedFilters {
+  categories: string[];
+  priceRange: [number, number];
+  rating: number;
+}
+
 interface ProductContextProps {
   products: Product[];
   sortBy: string;
@@ -14,15 +20,15 @@ interface ProductContextProps {
   itemsPerPage: number;
   totalPages: number;
   handlePageChange: (page: number) => void;
-  setSelectedFilters: () => void;
-  selectedFilters: [];
+  setSelectedFilters: Dispatch<SetStateAction<SelectedFilters>>;
+  selectedFilters: SelectedFilters;
 }
 
 export const ProductContext = createContext<ProductContextProps | null>(null);
 
 export default function ProductContextProvider({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState<Product[]>(data);
-  const [selectedFilters, setSelectedFilters] = useState({
+  const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>({
     categories: [],
     priceRange: [0, 1000],
     rating: 0,
@@ -61,7 +67,7 @@ export default function ProductContextProvider({ children }: { children: ReactNo
             return b.rating - a.rating;
         }
       });
-  }, [selectedFilters, sortBy]);
+  }, [selectedFilters, sortBy, products]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);

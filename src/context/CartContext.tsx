@@ -5,7 +5,7 @@ import { data } from "@/lib/productdata";
 import { Product } from "@/types/ProductTypes";
 
 interface Cart {
-  cart: Product[];
+  cart: Product[] | null;
   addToCart: (productId: number) => void;
   removeFromCart: (id: number) => void;
   SheetTrigger: boolean;
@@ -29,8 +29,10 @@ export default function CartContextProvider({ children }: { children: React.Reac
   const [SheetTrigger, setSheetTrigger] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("cart")) {
-      setCart(JSON.parse(localStorage.getItem("cart")));
+    const cartFromStorage = localStorage.getItem("cart");
+
+    if (cartFromStorage) {
+      setCart(JSON.parse(cartFromStorage));
     } else {
       localStorage.setItem("cart", JSON.stringify([]));
     }

@@ -9,7 +9,7 @@ export default function NotFound() {
             <div className="space-y-4">
               <div className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl">404</div>
               <p className="text-lg text-gray-500 dark:text-gray-400">Oops, something went wrong!</p>
-              <p className="text-lg text-gray-500 dark:text-gray-400">We're sorry, but the page you were trying to access is currently unavailable.</p>
+              <p className="text-lg text-gray-500 dark:text-gray-400">We&apos;re sorry, but the page you were trying to access is currently unavailable.</p>
             </div>
           </div>
           <div className="flex flex-col items-center justify-center space-y-6">
