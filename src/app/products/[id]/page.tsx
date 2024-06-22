@@ -16,17 +16,17 @@ export default function Page() {
   return (
     <div className=" max-w-6xl px-4 mx-auto py-6 gap-4">
       <div className="md:grid grid-cols-2 gap-6 mx-auto mb-12">
-        <div className="">
+        <div className="max-md:mb-4">
           <Carousel opts={{ align: "start", loop: true }} className="w-full aspect-[4/3] rounded-lg overflow-hidden">
             <CarouselContent>
-              <CarouselItem>
-                <Image src={`${product?.imageUrl}`} alt="Product Image 1" width={800} height={600} className="object-cover w-full h-full" />
+              <CarouselItem className="flex justify-center">
+                <Image src={`${product?.imageUrl}`} alt="Product Image 1" width={800} height={600} className="object-contain md:w-[400px] h-full" />
               </CarouselItem>
-              <CarouselItem>
-                <Image src={`${product?.imageUrl}`} alt="Product Image 2" width={800} height={600} className="object-cover w-full h-full" />
+              <CarouselItem className="flex justify-center">
+                <Image src={`${product?.imageUrl}`} alt="Product Image 2" width={800} height={600} className="object-contain md:w-[400px]  h-full" />
               </CarouselItem>
-              <CarouselItem>
-                <Image src={`${product?.imageUrl}`} alt="Product Image 3" width={800} height={600} className="object-cover w-full h-full" />
+              <CarouselItem className="flex justify-center">
+                <Image src={`${product?.imageUrl}`} alt="Product Image 3" width={800} height={600} className="object-contain md:w-[400px] h-full" />
               </CarouselItem>
             </CarouselContent>
             <CarouselPrevious className="absolute top-1/2 left-4 -translate-y-1/2 z-10 bg-white/50 hover:bg-white rounded-full p-2 cursor-pointer">
