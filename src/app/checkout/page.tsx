@@ -70,7 +70,7 @@ export default function Checkout() {
       <div className="relative mb-8 h-32 overflow-hidden rounded-lg">
         <Image src="/hero.png" alt="Checkout" width={1200} height={300} className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/50 to-gray-900/50 flex items-center justify-center">
-          <h1 className="text-3xl font-bold text-white">Checkout</h1>
+          <h1 className="text-3xl font-bold text-white">Checkout updated</h1>
         </div>
       </div>
       <div className="grid md:grid-cols-2 gap-8">
