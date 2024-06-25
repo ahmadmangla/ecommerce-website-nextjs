@@ -9,7 +9,7 @@ const ProductReviews = () => {
       <div className="grid gap-6">
         <div className="flex gap-4">
           <Avatar className="w-10 h-10 border">
-            <Image src="/Profile.png" alt="@shadcn" />
+            <Image src="/Profile.png" width={400} height={400} alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div className="grid gap-4">
@@ -36,7 +36,7 @@ const ProductReviews = () => {
         </div>
         <div className="flex gap-4">
           <Avatar className="w-10 h-10 border">
-            <Image src="/Profile.png" alt="@shadcn" />
+            <Image src="/Profile.png" width={400} height={400} alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div className="grid gap-4">
