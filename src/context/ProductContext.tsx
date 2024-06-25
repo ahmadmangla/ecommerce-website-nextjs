@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState, ReactNode, SetStateAction, Dispatch } from "react";
+import { createContext, useMemo, useState, ReactNode, SetStateAction, Dispatch } from "react";
 import { data } from "@/lib/productdata";
 import { Product } from "@/types/ProductTypes";
 
@@ -41,15 +41,7 @@ export default function ProductContextProvider({ children }: { children: ReactNo
         if (selectedFilters.categories.length > 0 && !selectedFilters.categories.includes(product.category)) {
           return false;
         }
-        // if (selectedFilters.categories.length > 0) {
-        //   return false;
-        // }
-        // if (product.price < selectedFilters.priceRange[0] || product.price > selectedFilters.priceRange[1]) {
-        //   return false;
-        // }
-        // if (product.rating < selectedFilters.rating) {
-        //   return false;
-        // }
+
         return true;
       })
       .sort((a, b) => {

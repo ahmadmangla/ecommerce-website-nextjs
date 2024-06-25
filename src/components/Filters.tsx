@@ -17,30 +17,6 @@ const Filters = () => {
       <div>
         <h3 className="text-base font-semibold mb-2">Categories</h3>
         <div className="grid gap-2">
-          {/* <Label className="flex items-center gap-2"> */}
-          {/* <Checkbox
-              checked={selectedFilters.categories.includes("Accessories")}
-              onCheckedChange={() => {
-                setSelectedFilters({
-                  ...selectedFilters,
-                  categories: selectedFilters.categories.includes("Accessories") ? selectedFilters.categories.filter((c) => c !== "Accessories") : [...selectedFilters.categories, "Accessories"],
-                });
-              }}
-            />
-            Accessories
-          </Label>
-          <Label className="flex items-center gap-2">
-            <Checkbox
-              checked={selectedFilters.categories.includes("Bags")}
-              onCheckedChange={() => {
-                setSelectedFilters({
-                  ...selectedFilters,
-                  categories: selectedFilters.categories.includes("Bags") ? selectedFilters.categories.filter((c) => c !== "Bags") : [...selectedFilters.categories, "Bags"],
-                });
-              }}
-            />
-            Bags
-          </Label> */}
           <Label className="flex items-center gap-2">
             <Checkbox
               checked={selectedFilters.categories.includes("clothing")}
@@ -53,18 +29,30 @@ const Filters = () => {
             />
             clothing
           </Label>
-          {/* <Label className="flex items-center gap-2">
+          <Label className="flex items-center gap-2">
             <Checkbox
-              checked={selectedFilters.categories.includes("Electronics")}
+              checked={selectedFilters.categories.includes("beauty")}
               onCheckedChange={() => {
                 setSelectedFilters({
                   ...selectedFilters,
-                  categories: selectedFilters.categories.includes("Electronics") ? selectedFilters.categories.filter((c) => c !== "Electronics") : [...selectedFilters.categories, "Electronics"],
+                  categories: selectedFilters.categories.includes("beauty") ? selectedFilters.categories.filter((c) => c !== "beauty") : [...selectedFilters.categories, "beauty"],
                 });
               }}
             />
-            Electronics
-          </Label> */}
+            beauty
+          </Label>
+          <Label className="flex items-center gap-2">
+            <Checkbox
+              checked={selectedFilters.categories.includes("fragrances")}
+              onCheckedChange={() => {
+                setSelectedFilters({
+                  ...selectedFilters,
+                  categories: selectedFilters.categories.includes("fragrances") ? selectedFilters.categories.filter((c) => c !== "fragrances") : [...selectedFilters.categories, "fragrances"],
+                });
+              }}
+            />
+            fragrances
+          </Label>
         </div>
       </div>
       <div>
