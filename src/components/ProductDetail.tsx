@@ -15,6 +15,14 @@ const ProductDetail = (props: Product) => {
     handleSheetTrigger();
   }
 
+  // TODO: Create a Rating Component and pass the rating prop to it
+  const handleRating = (rating: number) => {
+    const stars = Array.from({ length: 5 }, (_, index) => index + 1);
+    {
+      return stars.map((item) => <StarIcon key={item} className={`w-5 h-5 ${item <= rating ? "fill-amber-400" : "fill-muted stroke-muted-foreground"}`} />);
+    }
+  };
+
   return (
     <>
       <div>
@@ -23,11 +31,8 @@ const ProductDetail = (props: Product) => {
       </div>
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <StarIcon className="w-5 h-5 fill-amber-400" />
-          <StarIcon className="w-5 h-5 fill-amber-400" />
-          <StarIcon className="w-5 h-5 fill-amber-400" />
-          <StarIcon className="w-5 h-5 fill-muted stroke-muted-foreground" />
-          <StarIcon className="w-5 h-5 fill-muted stroke-muted-foreground" />
+          {handleRating(props?.rating)}
+
           <span className="text-sm text-gray-500 dark:text-gray-400">(23 reviews)</span>
         </div>
         <div className="text-3xl font-bold">${props?.price}</div>
