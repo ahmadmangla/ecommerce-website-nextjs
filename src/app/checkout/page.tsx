@@ -35,12 +35,6 @@ export default function Checkout() {
       ...shippingInfo,
       [e.target.name]: e.target.value,
     });
-    if (sameAsShipping) {
-      setBillingInfo({
-        ...billingInfo,
-        [e.target.name]: e.target.value,
-      });
-    }
   };
   const handleBillingChange: React.FocusEventHandler<HTMLInputElement> = (e) => {
     setBillingInfo({
@@ -65,44 +59,49 @@ export default function Checkout() {
       });
     }
   };
+
+  function capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  const displayShippingInfo = () => {
+    const data = Object.keys(shippingInfo).map(function (keyName) {
+      return (
+        <div className="space-y-2">
+          <Label htmlFor="shipping-name">{capitalizeFirstLetter(keyName)}</Label>
+          <Input id={`shipping-${keyName}`} name={`${keyName}`} value={shippingInfo[keyName as keyof typeof shippingInfo]} onChange={handleShippingChange} />
+        </div>
+      );
+    });
+    return data;
+  };
+
+  const displayBillingInfo = () => {
+    const data = Object.keys(billingInfo).map(function (keyName, keyIndex) {
+      return (
+        <div className="space-y-2">
+          <Label htmlFor={`billing-${keyName}`}>{capitalizeFirstLetter(keyName)}</Label>
+          <Input id={`billing-${keyName}`} name={`${keyName}`} value={billingInfo[keyName as keyof typeof billingInfo]} onChange={handleBillingChange} />
+        </div>
+      );
+    });
+
+    return data;
+  };
+
   return (
     <div className="container mx-auto py-12 px-4 md:px-6">
       <div className="relative mb-8 h-32 overflow-hidden rounded-lg">
         <Image src="/hero.png" alt="Checkout" width={1200} height={300} className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/50 to-gray-900/50 flex items-center justify-center">
-          <h1 className="text-3xl font-bold text-white">Checkout updated</h1>
+          <h1 className="text-3xl font-bold text-white">Checkout</h1>
         </div>
       </div>
       <div className="grid md:grid-cols-2 gap-8">
         <div className="mt-6 space-y-2">
           <div className="grid gap-4">
             <h3 className="text-2xl font-bold">Shipping Information</h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="shipping-name">Name</Label>
-                <Input id="shipping-name" name="name" value={shippingInfo.name} onChange={handleShippingChange} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="shipping-address">Address</Label>
-                <Input id="shipping-address" name="address" value={shippingInfo.address} onChange={handleShippingChange} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="shipping-city">City</Label>
-                <Input id="shipping-city" name="city" value={shippingInfo.city} onChange={handleShippingChange} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="shipping-state">State</Label>
-                <Input id="shipping-state" name="state" value={shippingInfo.state} onChange={handleShippingChange} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="shipping-zip">Zip</Label>
-                <Input id="shipping-zip" name="zip" value={shippingInfo.zip} onChange={handleShippingChange} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="shipping-phone">Phone</Label>
-                <Input id="shipping-phone" name="phone" value={shippingInfo.phone} onChange={handleShippingChange} />
-              </div>
-            </div>
+            <div className="grid md:grid-cols-2 gap-4">{displayShippingInfo()}</div>
 
             <div className="grid gap-4">
               <h3 className="text-2xl font-bold">Billing Information</h3>
@@ -111,32 +110,7 @@ export default function Checkout() {
                 <Label htmlFor="same-as-shipping">Same as shipping address</Label>
               </div>
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="billing-name">Name</Label>
-                <Input id="billing-name" name="name" value={billingInfo.name} onChange={handleBillingChange} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="billing-address">Address</Label>
-                <Input id="billing-address" name="address" value={billingInfo.address} onChange={handleBillingChange} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="billing-city">City</Label>
-                <Input id="billing-city" name="city" value={billingInfo.city} onChange={handleBillingChange} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="billing-state">State</Label>
-                <Input id="billing-state" name="state" value={billingInfo.state} onChange={handleBillingChange} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="billing-zip">Zip</Label>
-                <Input id="billing-zip" name="zip" value={billingInfo.zip} onChange={handleBillingChange} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="billing-phone">Phone</Label>
-                <Input id="billing-phone" name="phone" value={billingInfo.phone} onChange={handleBillingChange} />
-              </div>
-            </div>
+            <div className="grid md:grid-cols-2 gap-4">{displayBillingInfo()}</div>
             <div className="mt-6 space-y-2">
               <Button size="lg" className="w-full">
                 Proceed to Payment
