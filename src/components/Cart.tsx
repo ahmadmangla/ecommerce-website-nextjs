@@ -27,23 +27,22 @@ export default function Cart() {
         </SheetHeader>
         <div className="flex-1 overflow-auto">
           <div className="grid gap-4 p-4">
-            {cart &&
-              cart?.map((item: Product) => (
-                <div key={item.id} className="grid grid-cols-[80px_1fr_40px] items-center gap-4">
-                  <Image src={`${item.imageUrl}`} alt={item.title} width={80} height={80} className="rounded-md object-cover" />
-                  <div className="grid gap-1">
-                    <h4 className="font-medium">{item.title}</h4>
-                    <div className="flex items-center gap-2">
-                      <span className="text-gray-500 dark:text-gray-400">Qty: {item.quantity}</span>
-                      <span className="font-medium">${(item.price * item?.quantity).toFixed(2)}</span>
-                    </div>
+            {cart?.map((item: Product) => (
+              <div key={item._id} className="grid grid-cols-[80px_1fr_40px] items-center gap-4">
+                <Image src={`${item.imageUrl}`} alt={item.title} width={80} height={80} className="rounded-md object-cover" />
+                <div className="grid gap-1">
+                  <h4 className="font-medium">{item.title}</h4>
+                  <div className="flex items-center gap-2">
+                    <span className="text-gray-500 dark:text-gray-400">Qty: {item.quantity}</span>
+                    <span className="font-medium">${(item.price * item?.quantity).toFixed(2)}</span>
                   </div>
-                  <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
-                    <Trash2Icon className="h-4 w-4" />
-                    <span className="sr-only">Remove {item.title} from cart</span>
-                  </Button>
                 </div>
-              ))}
+                <Button variant="ghost" size="icon" onClick={() => removeFromCart(item._id)}>
+                  <Trash2Icon className="h-4 w-4" />
+                  <span className="sr-only">Remove {item.title} from cart</span>
+                </Button>
+              </div>
+            ))}
           </div>
         </div>
         <SheetFooter className="border-t sm:flex-col border-gray-200 dark:border-gray-800 p-4">

@@ -1,13 +1,13 @@
 "use client";
 
-import { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
-import { data } from "@/lib/productdata";
+import { Dispatch, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 import { Product } from "@/types/ProductTypes";
+import { ProductContext, useProducts } from "./ProductContext";
 
 interface Cart {
   cart: Product[] | null;
-  addToCart: (productId: number) => void;
-  removeFromCart: (id: number) => void;
+  addToCart: (productId: string) => void;
+  removeFromCart: (id: string) => void;
   SheetTrigger: boolean;
   setSheetTrigger: Dispatch<SetStateAction<boolean>>;
   handleSheetTrigger: () => void;
@@ -38,18 +38,28 @@ export default function CartContextProvider({ children }: { children: React.Reac
     }
   }, []);
 
+  const context = useProducts();
+  if (!context) {
+    return null;
+  }
+
+  const { products } = context;
+
   function handleSheetTrigger() {
     setSheetTrigger(!SheetTrigger);
   }
 
-  function addToCart(productId: number) {
-    const existingProduct = cart.find((product) => product.id === productId);
+  function addToCart(productId: string) {
+    const existingProduct = cart.find((product) => product._id === productId);
+    console.log(existingProduct, "existingProduct");
     if (existingProduct) {
       existingProduct.quantity++;
       setCart([...cart]);
       localStorage.setItem("cart", JSON.stringify([...cart]));
     } else {
-      const newProduct = data.find((product) => product.id === productId);
+      const newProduct = products.find((product) => product._id === productId);
+      console.log(newProduct, "newProduct");
+
       if (newProduct) {
         newProduct.quantity = 1;
         setCart([...cart, newProduct]);
@@ -58,8 +68,8 @@ export default function CartContextProvider({ children }: { children: React.Reac
     }
   }
 
-  function removeFromCart(id: number) {
-    const updatedCart = cart.filter((item) => item.id !== id);
+  function removeFromCart(id: string) {
+    const updatedCart = cart.filter((item) => item._id !== id);
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   }

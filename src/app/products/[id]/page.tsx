@@ -2,53 +2,66 @@
 
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { Separator } from "@/components/ui/separator";
-import { data } from "@/lib/productdata";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import ProductDetail from "@/components/ProductDetail";
 import ProductReviews from "@/components/ProductReviews";
 import RelatedProducts from "@/components/RelatedProducts";
+import { useContext } from "react";
+import { ProductContext } from "@/context/ProductContext";
 
 export default function Page() {
   const { id } = useParams();
 
-  const product = data.find((item) => id === item.id.toString());
-  return (
-    <div className=" max-w-6xl px-4 mx-auto py-6 gap-4">
-      <div className="md:grid grid-cols-2 gap-6 mx-auto mb-12">
-        <div className="max-md:mb-4">
-          <Carousel opts={{ align: "start", loop: true }} className="w-full aspect-[4/3] rounded-lg overflow-hidden">
-            <CarouselContent>
-              <CarouselItem className="flex justify-center">
-                <Image src={`${product?.imageUrl}`} alt="Product Image 1" width={800} height={600} className="object-contain md:w-[400px] h-full" />
-              </CarouselItem>
-              <CarouselItem className="flex justify-center">
-                <Image src={`${product?.imageUrl}`} alt="Product Image 2" width={800} height={600} className="object-contain md:w-[400px]  h-full" />
-              </CarouselItem>
-              <CarouselItem className="flex justify-center">
-                <Image src={`${product?.imageUrl}`} alt="Product Image 3" width={800} height={600} className="object-contain md:w-[400px] h-full" />
-              </CarouselItem>
-            </CarouselContent>
-            <CarouselPrevious className="absolute top-1/2 left-4 -translate-y-1/2 z-10 bg-white/50 hover:bg-white rounded-full p-2 cursor-pointer">
-              <ChevronLeftIcon className="w-5 h-5" />
-            </CarouselPrevious>
-            <CarouselNext className="absolute top-1/2 right-4 -translate-y-1/2 z-10 bg-white/50 hover:bg-white rounded-full p-2 cursor-pointer">
-              <ChevronRightIcon className="w-5 h-5" />
-            </CarouselNext>
-          </Carousel>
-        </div>
-        <div className="grid gap-2">{product && <ProductDetail {...product} />}</div>
-      </div>
+  const context = useContext(ProductContext);
 
-      <div className="col-span-2">
-        <Separator />
-        <RelatedProducts />
-      </div>
-      <div className="col-span-2">
-        <Separator />
-        <ProductReviews />
-      </div>
-    </div>
+  if (!context) {
+    return <div>Loading...</div>; // Handle the absence of context appropriately
+  }
+
+  const { products } = context;
+
+  const product = products.find((item) => id === item._id);
+  return (
+    <>
+      {product && (
+        <div className=" max-w-6xl px-4 mx-auto py-6 gap-4">
+          <div className="md:grid grid-cols-2 gap-6 mx-auto mb-12">
+            <div className="max-md:mb-4">
+              <Carousel opts={{ align: "start", loop: true }} className="w-full aspect-[4/3] rounded-lg overflow-hidden">
+                <CarouselContent>
+                  <CarouselItem className="flex justify-center">
+                    <Image src={`${product?.imageUrl}`} alt="Product Image 1" width={800} height={600} className="object-contain md:w-[400px] h-full" />
+                  </CarouselItem>
+                  <CarouselItem className="flex justify-center">
+                    <Image src={`${product?.imageUrl}`} alt="Product Image 2" width={800} height={600} className="object-contain md:w-[400px]  h-full" />
+                  </CarouselItem>
+                  <CarouselItem className="flex justify-center">
+                    <Image src={`${product?.imageUrl}`} alt="Product Image 3" width={800} height={600} className="object-contain md:w-[400px] h-full" />
+                  </CarouselItem>
+                </CarouselContent>
+                <CarouselPrevious className="absolute top-1/2 left-4 -translate-y-1/2 z-10 bg-white/50 hover:bg-white rounded-full p-2 cursor-pointer">
+                  <ChevronLeftIcon className="w-5 h-5" />
+                </CarouselPrevious>
+                <CarouselNext className="absolute top-1/2 right-4 -translate-y-1/2 z-10 bg-white/50 hover:bg-white rounded-full p-2 cursor-pointer">
+                  <ChevronRightIcon className="w-5 h-5" />
+                </CarouselNext>
+              </Carousel>
+            </div>
+            <div className="grid gap-2">{product && <ProductDetail {...product} />}</div>
+          </div>
+
+          <div className="col-span-2">
+            <Separator />
+            <RelatedProducts />
+          </div>
+          <div className="col-span-2">
+            <Separator />
+            <ProductReviews />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

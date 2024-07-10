@@ -10,7 +10,7 @@ const ProductDetail = (props: Product) => {
   const { handleSheetTrigger } = useContext(CartContext);
 
   const { cart, addToCart } = useContext(CartContext);
-  function handleClick(id: number) {
+  function handleClick(id: string) {
     addToCart(id);
     handleSheetTrigger();
   }
@@ -99,7 +99,7 @@ const ProductDetail = (props: Product) => {
           </Select>
         </div>
       </div>
-      <Button onClick={() => handleClick(props.id)} size="lg" className="bg-primary">
+      <Button onClick={() => handleClick(props._id)} size="lg" className="bg-primary">
         Add to cart
       </Button>
     </>

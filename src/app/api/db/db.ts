@@ -1,20 +1,31 @@
-import mongoose from 'mongoose';
-import {Constants} from '../config';
+import mongoose, { ConnectOptions, Mongoose } from 'mongoose';
 
-export async function connectToCluster() {
-    try {
-        if (Constants.DB_URL) {
-            await mongoose.connect(Constants.DB_URL);
-            console.log('Db Connected');
-        } else {
-            console.error('Error ============ ON DB Connection')
-            console.log('DB_URL is not defined in Constants');
-        }
-        
-    } catch (error) {
-        console.error('Error ============ ON DB Connection')
-        console.log(error);
-    }
+// MongoDB URI from environment variable (you can replace with your actual URI)
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/mydatabase';
+
+if (!MONGODB_URI) {
+  throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
 }
 
-connectToCluster()
+let cachedConnection: Mongoose | null = null;
+
+async function connectToDatabase(): Promise<Mongoose> {
+  if (cachedConnection) {
+    console.log('Using existing database connection');
+    return cachedConnection;
+  }
+
+  try {
+    const connection = await mongoose.connect(MONGODB_URI);
+    cachedConnection = connection;
+    console.log('New database connection established');
+    return cachedConnection;
+  } catch (error) {
+    console.error('Database connection error:', error);
+    throw error;
+  }
+}
+
+const dbConnection = async()=> await connectToDatabase();
+
+export default dbConnection;

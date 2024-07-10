@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Product } from "@/types/ProductTypes";
 import Link from "next/link";
 
-const ProductCard = ({ id, title, description, rating, price, imageUrl }: Product) => {
+const ProductCard = ({ _id, title, description, rating, price, imageUrl }: Product) => {
   const handleRating = (rating: number) => {
     const stars = Array.from({ length: 5 }, (_, index) => index + 1);
     {
@@ -15,7 +15,7 @@ const ProductCard = ({ id, title, description, rating, price, imageUrl }: Produc
     <>
       <Card className=" md:w-[250px] border-none shadow-none">
         <CardHeader className="mb-0 p-2">
-          <Link href={`/products/${id}`}>
+          <Link href={`/products/${_id}`}>
             <Image className="rounded mb-4" src={imageUrl} alt="Girl in Red Dress" width={"400"} height={100} />
           </Link>
           <CardTitle className="text-lg">{title}</CardTitle>

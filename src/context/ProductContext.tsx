@@ -1,7 +1,6 @@
 "use client";
 
-import { createContext, useMemo, useState, ReactNode, SetStateAction, Dispatch } from "react";
-import { data } from "@/lib/productdata";
+import { createContext, useMemo, useState, ReactNode, Dispatch, useEffect, useContext, SetStateAction } from "react";
 import { Product } from "@/types/ProductTypes";
 
 interface SelectedFilters {
@@ -22,18 +21,39 @@ interface ProductContextProps {
   handlePageChange: (page: number) => void;
   setSelectedFilters: Dispatch<SetStateAction<SelectedFilters>>;
   selectedFilters: SelectedFilters;
+  loading: boolean;
 }
 
 export const ProductContext = createContext<ProductContextProps | null>(null);
 
 export default function ProductContextProvider({ children }: { children: ReactNode }) {
-  const [products, setProducts] = useState<Product[]>(data);
+  const [products, setProducts] = useState<Product[]>([]);
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>({
     categories: [],
     priceRange: [0, 1000],
     rating: 0,
   });
   const [sortBy, setSortBy] = useState("featured");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/product");
+        const json = await response.json();
+        if (json) {
+          setProducts(json?.products || []);
+        }
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const filteredProducts = useMemo(() => {
     return products
@@ -41,7 +61,6 @@ export default function ProductContextProvider({ children }: { children: ReactNo
         if (selectedFilters.categories.length > 0 && !selectedFilters.categories.includes(product.category)) {
           return false;
         }
-
         return true;
       })
       .sort((a, b) => {
@@ -60,7 +79,7 @@ export default function ProductContextProvider({ children }: { children: ReactNo
         }
       });
   }, [selectedFilters, sortBy, products]);
-  const [currentPage, setCurrentPage] = useState(1);
+
   const itemsPerPage = 12;
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const handlePageChange = (page: number) => {
@@ -81,9 +100,12 @@ export default function ProductContextProvider({ children }: { children: ReactNo
         handlePageChange,
         setSelectedFilters,
         selectedFilters,
+        loading,
       }}
     >
       {children}
     </ProductContext.Provider>
   );
 }
+
+export const useProducts = () => useContext(ProductContext);

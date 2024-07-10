@@ -65,9 +65,9 @@ export default function Checkout() {
   }
 
   const displayShippingInfo = () => {
-    const data = Object.keys(shippingInfo).map(function (keyName) {
+    const data = Object.keys(shippingInfo).map(function (keyName, keyIndex) {
       return (
-        <div className="space-y-2">
+        <div className="space-y-2" key={keyIndex}>
           <Label htmlFor="shipping-name">{capitalizeFirstLetter(keyName)}</Label>
           <Input id={`shipping-${keyName}`} name={`${keyName}`} value={shippingInfo[keyName as keyof typeof shippingInfo]} onChange={handleShippingChange} />
         </div>
@@ -79,7 +79,7 @@ export default function Checkout() {
   const displayBillingInfo = () => {
     const data = Object.keys(billingInfo).map(function (keyName, keyIndex) {
       return (
-        <div className="space-y-2">
+        <div className="space-y-2" key={keyIndex}>
           <Label htmlFor={`billing-${keyName}`}>{capitalizeFirstLetter(keyName)}</Label>
           <Input id={`billing-${keyName}`} name={`${keyName}`} value={billingInfo[keyName as keyof typeof billingInfo]} onChange={handleBillingChange} />
         </div>
@@ -129,7 +129,7 @@ export default function Checkout() {
               <div className="space-y-2">
                 {cart &&
                   cart?.map((item: Product) => (
-                    <div key={item.id} className="grid grid-cols-[80px_1fr_40px] items-center gap-4">
+                    <div key={item._id} className="grid grid-cols-[80px_1fr_40px] items-center gap-4">
                       <Image src={item.imageUrl} alt={item.title} width={80} height={80} className="rounded-md object-cover" />
                       <div className="grid gap-1">
                         <h4 className="font-medium">{item.title}</h4>
@@ -138,7 +138,7 @@ export default function Checkout() {
                           <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
                         </div>
                       </div>
-                      <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
+                      <Button variant="ghost" size="icon" onClick={() => removeFromCart(item._id)}>
                         <Trash2Icon className="h-4 w-4" />
                         <span className="sr-only">Remove {item.title} from cart</span>
                       </Button>
