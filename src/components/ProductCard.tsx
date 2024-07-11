@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
-import { Product } from "@/types/ProductTypes";
+import { Product } from "@/types/types";
 import Link from "next/link";
 
 const ProductCard = ({ _id, title, description, rating, price, imageUrl }: Product) => {

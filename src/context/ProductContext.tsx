@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useMemo, useState, ReactNode, Dispatch, useEffect, useContext, SetStateAction } from "react";
-import { Product } from "@/types/ProductTypes";
+import { Product } from "@/types/types";
 
 interface SelectedFilters {
   categories: string[];

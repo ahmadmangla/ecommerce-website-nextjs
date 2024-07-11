@@ -5,7 +5,7 @@ import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescri
 import { Button } from "@/components/ui/button";
 import { CartContext } from "@/context/CartContext";
 import Image from "next/image";
-import { Product } from "@/types/ProductTypes";
+import { Product } from "@/types/types";
 import { useRouter } from "next/navigation";
 
 export default function Cart() {

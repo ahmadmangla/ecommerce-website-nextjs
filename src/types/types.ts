@@ -8,3 +8,5 @@ export interface Product {
     price: number
     category: string,
 }
+
+export type id = string | null;

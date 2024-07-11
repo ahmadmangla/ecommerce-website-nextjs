@@ -3,7 +3,7 @@ import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Button } from "./ui/button";
-import { Product } from "@/types/ProductTypes";
+import { Product } from "@/types/types";
 import { CartContext } from "@/context/CartContext";
 
 const ProductDetail = (props: Product) => {

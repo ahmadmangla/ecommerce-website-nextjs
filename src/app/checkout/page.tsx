@@ -8,7 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { CartContext } from "@/context/CartContext";
 import Image from "next/image";
-import { Product } from "@/types/ProductTypes";
+import { Product } from "@/types/types";
 
 export default function Checkout() {
   const { cart, removeFromCart } = useContext(CartContext);

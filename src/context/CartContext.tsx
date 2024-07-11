@@ -1,7 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, createContext, useContext, useEffect, useState } from "react";
-import { Product } from "@/types/ProductTypes";
+import { Product } from "@/types/types";
 import { ProductContext, useProducts } from "./ProductContext";
 
 interface Cart {
